@@ -49,13 +49,13 @@ if user_name != "":
 
             # 入力フィールドをクリアするために一時変数をリセット
             st.query_params = {"reload": "true"}
-    for i, message in enumerate(st.session_state.messages):
-        if i == 0 and message["role"] == "system":
-            continue  # 最初のプロンプトをスキップ
-        if message["role"] == "user":
-            st.write(f"{message['content']}")
-        else:
-            st.write(f"AI: {message['content']}")
+        for i, message in enumerate(st.session_state.messages):
+            if i == 0 and message["role"] == "system":
+                continue  # 最初のプロンプトをスキップ
+            if message["role"] == "user":
+                st.write(f"{message['content']}")
+            else:
+                st.write(f"AI: {message['content']}")
     # リセットボタンの処理
     if st.button("はじめから"):
         for key in st.session_state.keys():
