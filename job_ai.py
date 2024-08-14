@@ -43,6 +43,15 @@ if user_name != "":
                 st.session_state.messages.append({"role": "assistant", "content": assistant_message})
                 # 会話履歴を更新
                 st.session_state.conversation_history += f"{user_message}\nAI: {assistant_message}\n"
+                #音声ファイル作成
+                response = client.audio.speech.create(
+                    model="tts-1",
+                    voice="alloy",
+                    input=assistant_message,
+                )
+
+                response.stream_to_file("output.mp3")
+                st.audio("output.mp3", format="audio/mpeg", loop=True)
                 st.query_params = {"reload": "true"}
             except Exception as e:
                 st.error(f"Error: {str(e)}")
